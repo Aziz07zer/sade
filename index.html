@@ -45,7 +45,9 @@ button {
 .heart {
   position: absolute;
   pointer-events: none;
-  animation: floatUp linear;
+  font-size: 25px;
+  animation-name: floatUp;
+  animation-timing-function: linear;
 }
 
 @keyframes floatUp {
@@ -81,18 +83,18 @@ showPhotoBtn.onclick = () => {
 };
 
 function createHearts() {
-  const numHearts = 10; // aynı anda uçan kalp sayısı
+  const numHearts = 10; // aynı anda uçacak kalp sayısı
   for (let i = 0; i < numHearts; i++) {
     const heart = document.createElement('div');
     heart.classList.add('heart');
     heart.innerText = "❤️";
 
-    // x ve y ekseninde rastgele başlama pozisyonu
+    // ekranın her yerinden rastgele başlama (x ve y)
     heart.style.left = Math.random() * window.innerWidth + 'px';
     heart.style.top = Math.random() * window.innerHeight + 'px';
 
     // rastgele boyut
-    const size = 20 + Math.random() * 20;
+    const size = 15 + Math.random() * 25;
     heart.style.fontSize = size + 'px';
 
     // rastgele animasyon süresi
@@ -100,12 +102,14 @@ function createHearts() {
 
     document.body.appendChild(heart);
 
+    // animasyon bitince sil
     setTimeout(() => {
       heart.remove();
     }, 5000);
   }
 
-  setTimeout(createHearts, 500); // sürekli üretim
+  // sürekli üret
+  setTimeout(createHearts, 500);
 }
 </script>
 
