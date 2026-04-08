@@ -3,195 +3,74 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Beni Affet</title>
-
+<title>❤️Kraliçem❤️</title>
 <style>
 body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    text-align: center;
-    background: linear-gradient(135deg, #ffd6d6, #ffecec);
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #111;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  flex-direction: column;
 }
-
-.container {
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+h1, p {
+  margin: 10px 0;
 }
-
-.buttons {
-    display: flex;
-    gap: 15px;
-}
-
-/* Butonlar */
 button {
-    border: none;
-    border-radius: 15px;
-    cursor: pointer;
-    transition: 0.3s;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  margin-top: 20px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 20px;
+  background: white;
+  color: black;
+  font-size: 16px;
+  cursor: pointer;
 }
-
-.yes {
-    background: #28a745;
-    color: white;
-    font-size: 20px;
-    padding: 20px 40px;
+video {
+  margin-top: 20px;
+  max-width: 100%;
+  border-radius: 12px;
 }
-
-.no {
-    background: #dc3545;
-    color: white;
-    font-size: 14px;
-    padding: 10px 20px;
-}
-
-button:hover {
-    transform: scale(1.05);
-}
-
-/* Full ekran */
-.fullscreen {
-    width: 100vw;
-    height: 100vh;
-    font-size: 35px;
-}
-
-/* Son yazı efekti */
-.result {
-    font-size: 32px;
-    animation: fadeIn 1s ease, pop 0.6s ease;
-}
-
-/* Animasyonlar */
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
-
-@keyframes pop {
-    0% { transform: scale(0.5); }
-    100% { transform: scale(1); }
-}
-
-/* Kalp efekti */
-.heart {
-    position: absolute;
-    font-size: 20px;
-    animation: float 2s ease forwards;
-}
-
-@keyframes float {
-    0% { transform: translateY(0); opacity: 1; }
-    100% { transform: translateY(-100px); opacity: 0; }
-}
-@keyframes fall {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(100vh); }
-}
+.hidden { display: none; }
 </style>
 </head>
-
 <body>
 
-<div class="container" id="app">
-    <h1 id="question">Beni Affet</h1>
-
-    <div class="buttons">
-        <button class="yes" onclick="affettim()">Affettim</button>
-        <button class="no" onclick="affetmedim()">Affetmedim</button>
-    </div>
-</div>
+<h1 id="line1"></h1>
+<p id="line2" class="hidden">Dünyanın en güzel kızını görmek ister misin?</p>
+<button id="showCamBtn" class="hidden">Evet, görmek isterim</button>
+<video id="camVideo" class="hidden" autoplay></video>
 
 <script>
-let step = 0;
+const line1 = document.getElementById('line1');
+const line2 = document.getElementById('line2');
+const showCamBtn = document.getElementById('showCamBtn');
+const camVideo = document.getElementById('camVideo');
 
-let sorular = [
-    "Beni Affet 😔",
-    "Gerçekten Affetmeyecek misin?",
-    "Bak üzülüyorum 😢",
-    "Son 2 şansın kaldı!",
-    "SON ŞANS 😭"
-];
+// 1. Merhaba yazısı
+line1.innerText = "HOŞGELDİN KRALİÇEM";
 
-// arka plan renkleri
-let colors = [
-    "#ffd6d6",
-    "#ffe0cc",
-    "#fff0b3",
-    "#d6ffd6",
-    "#d6e0ff"
-];
+setTimeout(() => {
+  // 2. Soru ve buton göster
+  line2.classList.remove('hidden');
+  showCamBtn.classList.remove('hidden');
+}, 3000);
 
-function affettim() {
-    document.getElementById("app").innerHTML =
-        '<div class="container"><h1 class="result">Biliyordum affedeceğini 😎</h1></div>';
-
-    // 🎉 konfeti efekti
-    for (let i = 0; i < 30; i++) {
-        let confetti = document.createElement("div");
-        confetti.innerText = "😸";
-        confetti.style.position = "absolute";
-        confetti.style.left = Math.random() * 100 + "vw";
-        confetti.style.top = "-20px";
-        confetti.style.fontSize = (15 + Math.random() * 20) + "px";
-        confetti.style.animation = "fall 2s linear forwards";
-        document.body.appendChild(confetti);
-
-        setTimeout(() => confetti.remove(), 2000);
-    }
-
-    // kalp efekti
-    for (let i = 0; i < 15; i++) {
-        let heart = document.createElement("div");
-        heart.className = "heart";
-        heart.innerText = "😺";
-        heart.style.left = Math.random() * 100 + "vw";
-        heart.style.top = "70vh";
-        heart.style.fontSize = (15 + Math.random() * 20) + "px";
-        document.body.appendChild(heart);
-
-        setTimeout(() => heart.remove(), 2000);
-    }
-}
-
-function affetmedim() {
-    step++;
-
-    // 📳 titreşim (telefonlarda çalışır)
-    if (navigator.vibrate) {
-        navigator.vibrate(200);
-    }
-
-    if (step < sorular.length) {
-        document.getElementById("question").innerText = sorular[step];
-
-        // 🎨 arka plan değişimi
-        document.body.style.background = colors[step];
-
-        let yesBtn = document.querySelector(".yes");
-        let noBtn = document.querySelector(".no");
-
-        // yeşil büyüyor
-        yesBtn.style.fontSize = (20 + step * 7) + "px";
-        yesBtn.style.padding = (20 + step * 7) + "px";
-
-        // kırmızı küçülüyor (daha fazla küçülttük)
-        noBtn.style.fontSize = Math.max(5, (14 - step * 3)) + "px";
-        noBtn.style.padding = Math.max(3, (10 - step * 3)) + "px";
-    }
-
-    if (step === sorular.length) {
-        document.getElementById("app").innerHTML = `
-            <button class="yes fullscreen" onclick="affettim()">
-                BENİ AFFET 😅
-            </button>
-        `;
-    }
-}
+// 3. Butona basınca kamerayı aç
+showCamBtn.onclick = () => {
+  navigator.mediaDevices.getUserMedia({ video: true })
+    .then(stream => {
+      camVideo.srcObject = stream;
+      camVideo.classList.remove('hidden');
+    })
+    .catch(err => {
+      alert("Kamera açılamadı: " + err);
+    });
+};
 </script>
 
 </body>
