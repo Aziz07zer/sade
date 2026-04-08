@@ -42,14 +42,10 @@ button {
   border-radius: 12px;
 }
 
-/* Kalpler için */
+/* Kalpler emoji */
 .heart {
   position: absolute;
-  width: 25px;
-  height: 25px;
-  background-color: red;
-  clip-path: polygon(50% 0%, 61% 15%, 75% 15%, 84% 25%, 84% 37%, 75% 50%, 50% 75%, 25% 50%, 16% 37%, 16% 25%, 25% 15%, 39% 15%);
-  opacity: 0.8;
+  font-size: 25px;
   pointer-events: none;
   animation: floatUp linear;
 }
@@ -94,10 +90,10 @@ function createHearts() {
   for (let i = 0; i < numHearts; i++) {
     const heart = document.createElement('div');
     heart.classList.add('heart');
+    heart.innerText = "❤️";
     heart.style.left = Math.random() * window.innerWidth + 'px';
     heart.style.animationDuration = (3 + Math.random() * 2) + 's';
-    heart.style.width = 20 + Math.random() * 15 + 'px';
-    heart.style.height = heart.style.width;
+    heart.style.fontSize = 20 + Math.random() * 15 + 'px';
     document.body.appendChild(heart);
 
     // Kalp animasyonu bitince sil
