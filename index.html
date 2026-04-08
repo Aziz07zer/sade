@@ -42,17 +42,15 @@ button {
   border-radius: 12px;
 }
 
-/* Kalpler emoji */
 .heart {
   position: absolute;
-  font-size: 25px;
   pointer-events: none;
   animation: floatUp linear;
 }
 
 @keyframes floatUp {
   0% { transform: translateY(0) scale(1); opacity: 1; }
-  100% { transform: translateY(-500px) scale(1.5); opacity: 0; }
+  100% { transform: translateY(-600px) scale(1.5); opacity: 0; }
 }
 </style>
 </head>
@@ -69,7 +67,6 @@ const line2 = document.getElementById('line2');
 const showPhotoBtn = document.getElementById('showPhotoBtn');
 const photo = document.getElementById('photo');
 
-// 1. Merhaba yazısı
 line1.innerText = "HOŞGELDİN KRALİÇEM";
 
 setTimeout(() => {
@@ -77,33 +74,38 @@ setTimeout(() => {
   showPhotoBtn.classList.remove('hidden');
 }, 3000);
 
-// 2. Butona basınca fotoğraf ve kalpler
 showPhotoBtn.onclick = () => {
   photo.classList.remove('hidden');
   showPhotoBtn.style.display = 'none';
   createHearts();
 };
 
-// 3. Kalp animasyonu fonksiyonu
 function createHearts() {
-  const numHearts = 15; // aynı anda uçan kalp sayısı
+  const numHearts = 10; // aynı anda uçan kalp sayısı
   for (let i = 0; i < numHearts; i++) {
     const heart = document.createElement('div');
     heart.classList.add('heart');
     heart.innerText = "❤️";
+
+    // x ve y ekseninde rastgele başlama pozisyonu
     heart.style.left = Math.random() * window.innerWidth + 'px';
-    heart.style.animationDuration = (3 + Math.random() * 2) + 's';
-    heart.style.fontSize = 20 + Math.random() * 15 + 'px';
+    heart.style.top = Math.random() * window.innerHeight + 'px';
+
+    // rastgele boyut
+    const size = 20 + Math.random() * 20;
+    heart.style.fontSize = size + 'px';
+
+    // rastgele animasyon süresi
+    heart.style.animationDuration = (2 + Math.random() * 3) + 's';
+
     document.body.appendChild(heart);
 
-    // Kalp animasyonu bitince sil
     setTimeout(() => {
       heart.remove();
     }, 5000);
   }
 
-  // Her 400ms'de yeni kalpler üret
-  setTimeout(createHearts, 400);
+  setTimeout(createHearts, 500); // sürekli üretim
 }
 </script>
 
