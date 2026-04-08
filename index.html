@@ -42,12 +42,14 @@ button {
   border-radius: 12px;
 }
 
+/* Kalpler için */
 .heart {
   position: absolute;
-  width: 30px;
-  height: 30px;
-  background: url('https://tr.wikipedia.org/wiki/Kalp_%28sembol%29#/media/Dosya:A_perfect_SVG_heart.svg') no-repeat center center;
-  background-size: contain;
+  width: 25px;
+  height: 25px;
+  background-color: red;
+  clip-path: polygon(50% 0%, 61% 15%, 75% 15%, 84% 25%, 84% 37%, 75% 50%, 50% 75%, 25% 50%, 16% 37%, 16% 25%, 25% 15%, 39% 15%);
+  opacity: 0.8;
   pointer-events: none;
   animation: floatUp linear;
 }
@@ -88,13 +90,13 @@ showPhotoBtn.onclick = () => {
 
 // 3. Kalp animasyonu fonksiyonu
 function createHearts() {
-  const numHearts = 20; // kaç kalp
+  const numHearts = 15; // aynı anda uçan kalp sayısı
   for (let i = 0; i < numHearts; i++) {
     const heart = document.createElement('div');
     heart.classList.add('heart');
     heart.style.left = Math.random() * window.innerWidth + 'px';
     heart.style.animationDuration = (3 + Math.random() * 2) + 's';
-    heart.style.width = 20 + Math.random() * 20 + 'px';
+    heart.style.width = 20 + Math.random() * 15 + 'px';
     heart.style.height = heart.style.width;
     document.body.appendChild(heart);
 
@@ -104,8 +106,8 @@ function createHearts() {
     }, 5000);
   }
 
-  // Her 500ms'de yeni kalpler üret
-  setTimeout(createHearts, 500);
+  // Her 400ms'de yeni kalpler üret
+  setTimeout(createHearts, 400);
 }
 </script>
 
